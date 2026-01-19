@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detection Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <!-- 🔷 Navbar -->
+    <nav class="navbar">
+        <div class="logo">🧠 MIND SEARCH</div>
+        <div class="nav-links">
+            <a href="/">🏠 Home</a>
+            <a href="/feedback">📝 Feedback</a>
+            <a href="#">📞 Contact</a>
+        </div>
+    </nav>
+
+    <!-- 🎯 Result Section -->
+    <section class="result-container">
+        <h1>🩺 Diagnosis Result</h1>
+        <div class="result-box">
+            <h2>📢 {{ prediction }}</h2>
+            <p>🟢 Accuracy: <strong>{{ accuracy }}%</strong></p>
+            <pre>{{ report }}</pre>
+
+            <!-- 📊 Confusion Matrix -->
+            {% if plot_url %}
+                <img src="data:image/png;base64,{{ plot_url }}" alt="Confusion Matrix">
+            {% endif %}
+        </div>
+
+        <!-- 🔥 Show Doctors Only if Tumor is Detected -->
+        {% if prediction == "Tumor Detected" %}
+        <h2>🏥 Recommended Neurosurgeons in Chandigarh</h2>
+
+        {% if doctors %}
+        <table class="doctor-table">
+            <tr>
+                <th>👨‍⚕️ Doctor Name</th>
+                <th>🏥 Hospital/Clinic</th>
+                <th>📞 Contact</th>
+                <th>📍 Google Maps</th>
+            </tr>
+            {% for doc in doctors %}
+            <tr>
+                <td>{{ doc.name }}</td>
+                <td>{{ doc.hospital }}</td>
+                <td><a href="tel:{{ doc.contact }}">{{ doc.contact }}</a></td>
+                <td>
+                    <a href="https://www.google.com/maps/search/{{ doc.hospital | urlencode }}" target="_blank">
+                        📍 View on Maps
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>❌ No doctors available in Chandigarh.</p>
+        {% endif %}
+        {% endif %}
+
+        <!-- 🔄 Try Again Button -->
+        <a href="/" class="btn">🔄 Try Again</a>
+    </section>
+
+    <!-- 🌍 Footer -->
+    <footer>
+        <p>© 2024 MIND SEARCH AI | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>

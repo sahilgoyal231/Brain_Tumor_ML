@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIND SEARCH</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <!-- 🔷 Navbar -->
+    <nav class="navbar">
+        <div class="logo">🧠 MIND SEARCH-Lets Search Your Mind</div>
+        <div class="nav-links">
+            <a href="/">🏠 Home</a>
+            <a href="#how-it-works">📊 How It Works</a>
+            <a href="/feedback">📝 Feedback</a>
+            <a href="#">📞 Contact</a>
+        </div>
+    </nav>
+
+    <!-- 🎯 Hero Section -->
+     <!-- 🎯 Hero Section -->
+<header class="hero">
+    <div class="hero-text">
+        <h1>Every Scan Matters</h1>
+        <p>Don't Let a Brain Tumor Go Undetected</p>
+    </div>
+</header>
+
+    <header class="hero">
+        <h1>🔬 AI-Powered Brain Tumor Detection</h1>
+        <p>Upload your MRI scan and get instant diagnosis with advanced AI technology.</p>
+        <a href="#upload-section" class="btn">🩺 Upload MRI Scan</a>
+    </header>
+
+    <!-- ⚡ Upload Section with Loading Animation -->
+    <section id="upload-section" class="upload-container">
+        <h2>📤 Upload MRI Scan</h2>
+        <form id="upload-form" action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" required>
+            <button id="predict-btn" type="submit" class="btn">🔍 Analyze</button>
+
+            <!-- ⏳ Loading Animation -->
+            <div id="loading-animation" class="loader-container" style="display: none;">
+                <div class="loader"></div>
+                <p>Analyzing Image... Please wait ⏳</p>
+            </div>
+        </form>
+    </section>
+
+    <!-- 🚀 AI Benefits Section -->
+    <section class="features">
+        <h2>💡 Why Choose BrainScan AI?</h2>
+        <div class="feature-grid">
+            <div class="feature-box">
+                <h3>⚡ Fast & Accurate</h3>
+                <p>Get results in seconds with high accuracy.</p>
+            </div>
+            <div class="feature-box">
+                <h3>🔬 AI-Powered Analysis</h3>
+                <p>Trained with thousands of MRI scans.</p>
+            </div>
+            <div class="feature-box">
+                <h3>🔒 Secure & Private</h3>
+                <p>Your data is encrypted & never stored.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 📊 How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <h2>📊 How It Works</h2>
+        <div class="steps">
+            <div class="step">
+                <h3>📤 Step 1</h3>
+                <p>Upload your MRI scan image.</p>
+            </div>
+            <div class="step">
+                <h3>🧠 Step 2</h3>
+                <p>AI analyzes your scan in seconds.</p>
+            </div>
+            <div class="step">
+                <h3>📢 Step 3</h3>
+                <p>Get instant results & take action.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🌍 Footer -->
+    <footer>
+        <p>© 2024 BrainScan AI | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>

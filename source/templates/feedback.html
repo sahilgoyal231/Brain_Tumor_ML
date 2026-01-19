@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script defer src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">🧠 MIND SEARCH</div>
+        <div class="nav-links">
+            <a href="/">🏠 Home</a>
+            <a href="/feedback">📝 Feedback</a>
+            <a href="#">📞 Contact</a>
+        </div>
+    </nav>
+
+    <!-- Feedback Section -->
+    <section class="feedback-container">
+        <h1>📝 Share Your Feedback</h1>
+        <form action="/submit-feedback" method="post">
+            <label for="name">👤 Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">📧 Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">✍️ Your Feedback:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit" class="btn">📤 Submit</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 BrainScan AI | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
