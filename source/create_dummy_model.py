@@ -31,6 +31,26 @@ class BrainTumorCNN(nn.Module):
 model = BrainTumorCNN()
 
 # 💾 Save the dummy model as brain_tumor.pth
-torch.save(model.state_dict(), '../model/brain_tumor.pth')
+import os
 
-print("🎉 Dummy BrainTumorCNN saved at model/brain_tumor.pth")
+# Try multiple possible model paths
+possible_model_paths = [
+    '../model/brain_tumor.pth',
+    'model/brain_tumor.pth',
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), 'model', 'brain_tumor.pth')
+]
+
+model_saved = False
+for model_path in possible_model_paths:
+    try:
+        # Create directory if it doesn't exist
+        os.makedirs(os.path.dirname(model_path), exist_ok=True)
+        torch.save(model.state_dict(), model_path)
+        print(f"🎉 Dummy BrainTumorCNN saved at {model_path}")
+        model_saved = True
+        break
+    except Exception as e:
+        continue
+
+if not model_saved:
+    print("⚠️ Failed to save model. Please check directory permissions.")

@@ -16,13 +16,26 @@ app = Flask(__name__)
 
 # ✅ Load trained model
 model = BrainTumorCNN()
-model_path = 'model/brain_tumor.pth'
+# Try multiple possible model paths
+possible_model_paths = [
+    'model/brain_tumor.pth',
+    '../model/brain_tumor.pth',
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), 'model', 'brain_tumor.pth')
+]
 
-if os.path.exists(model_path):
+model_path = None
+for path in possible_model_paths:
+    if os.path.exists(path):
+        model_path = path
+        break
+
+if model_path and os.path.exists(model_path):
     model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu')))
     model.eval()
+    print(f"✅ Model loaded from {model_path}")
 else:
-    print("⚠️ Model file not found. Please place 'brain_tumor.pth' in 'model/' folder.")
+    print(f"⚠️ Model file not found. Tried: {possible_model_paths}")
+    print("⚠️ Please place 'brain_tumor.pth' in 'model/' folder.")
 
 # ✅ Image Preprocessing
 transform = transforms.Compose([
